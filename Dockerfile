@@ -1,6 +1,14 @@
-FROM nginx:alpine
-RUN rm -rf usr/share/nginx/html/*
-# RUN npm i
-# RUN ng build
-CMD ["nginx", "-g", "daemon off"]
+FROM node:latest as node
+LABEL authors="Antonio Olvera Fernández"
+WORKDIR /usr/nodee
+COPY "." "."
+RUN npm -g update
+RUN npm i
+RUN npm run build
+
+
+FROM nginx:latest as nginx-start
+WORKDIR /
+COPY --from=node /usr/nodee/dist/docker-angular /usr/share/nginx/html
+
 

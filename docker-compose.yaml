@@ -1,16 +1,12 @@
-version: '3.8'
+version: "3.7"
 services:
-  nginx:
-    build:
-      context: ./
-      dockerfile: Dockerfile
-    container_name: nginx-server
+  app:
+    build: .
     restart: always
     ports:
-      - 8080:80
-    volumes:
-      - ./dist/docker-angular:/usr/share/nginx/html/
-volumes:
-  dist: {}
+      - "8080:80"
+    # volumes:
+    #   - ./dist/docker-angular:/usr/share/nginx/html/
 
-  # docker-compose up -d
+# volumes:
+#   dist: {}
